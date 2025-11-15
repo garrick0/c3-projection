@@ -12,6 +12,10 @@
   },
   "author": "garrick0",
   "license": "MIT",
+  "dependencies": {
+    "c3-shared": "^0.1.0",
+    "c3-parsing": "^0.1.0"
+  },
   "devDependencies": {
     "@types/node": "^20.10.0",
     "typescript": "^5.3.3",
