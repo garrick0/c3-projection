@@ -1,7 +1,7 @@
 # Module Dependency Analysis
 
 **Target:** ./src
-**Generated:** 2025-11-16T03:27:42.758Z
+**Generated:** 2025-11-16T04:22:08.112Z
 
 ---
 
@@ -11,9 +11,9 @@
 |--------|-------|
 | Total Modules | 12 |
 | Total Files | 36 |
-| Total Dependencies | 0 |
-| Average Coupling | 0.00 |
-| Max Dependencies | 0 |
+| Total Dependencies | 19 |
+| Average Coupling | 1.58 |
+| Max Dependencies | 4 |
 | Circular Dependencies | 0 |
 
 ---
@@ -28,19 +28,19 @@
 
 ## Most Depended-On Modules (Hotspots)
 
-1. **src** - Used by 0 modules
-2. **strategies** - Used by 0 modules
-3. **renderers** - Used by 0 modules
-4. **persistence** - Used by 0 modules
-5. **layout-engines** - Used by 0 modules
+1. **entities** - Used by 7 modules
+2. **value-objects** - Used by 5 modules
+3. **ports** - Used by 5 modules
+4. **services** - Used by 2 modules
+5. **src** - Used by 0 modules
 
 ## Most Coupled Modules
 
-1. **src** - Depends on 0 modules
-2. **strategies** - Depends on 0 modules
-3. **renderers** - Depends on 0 modules
-4. **persistence** - Depends on 0 modules
-5. **layout-engines** - Depends on 0 modules
+1. **strategies** - Depends on 4 modules
+2. **services** - Depends on 3 modules
+3. **use-cases** - Depends on 3 modules
+4. **persistence** - Depends on 2 modules
+5. **layout-engines** - Depends on 2 modules
 
 ## ✓ No Circular Dependencies
 
@@ -50,7 +50,7 @@ Great! Your architecture has no circular dependencies.
 
 ## Recommendations
 
-3. **Check Isolated Modules:** 12 module(s) with no connections (potential dead code?)
+3. **Check Isolated Modules:** 2 module(s) with no connections (potential dead code?)
 ✓ Architecture looks good! No major issues detected.
 
 ---

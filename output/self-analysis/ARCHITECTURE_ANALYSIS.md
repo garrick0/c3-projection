@@ -1,6 +1,6 @@
 # c3-projection Architecture Analysis
 
-**Generated:** 2025-11-16T03:28:54.238Z
+**Generated:** 2025-11-16T04:22:45.653Z
 **Architecture Score:** 100/100
 
 ---
@@ -19,8 +19,8 @@ c3-projection follows Clean Architecture principles with clear layer separation:
 |--------|-------|
 | Total Modules | 12 |
 | Total Files | 36 |
-| Dependencies | 0 |
-| Avg Coupling | 0.00 |
+| Dependencies | 19 |
+| Avg Coupling | 1.58 |
 | Circular Deps | 0 |
 | Architecture Score | 100/100 |
 
@@ -36,18 +36,18 @@ c3-projection follows Clean Architecture principles with clear layer separation:
 
 The application layer orchestrates domain objects to implement use cases.
 
-- **use-cases**: 1 files, 0 dependencies
+- **use-cases**: 1 files, 3 dependencies
 - **dto**: 1 files, 0 dependencies
 
 ### Infrastructure Layer
 
 The infrastructure layer provides concrete implementations of domain ports.
 
-- **strategies**: 1 files, 0 dependencies
-- **renderers**: 1 files, 0 dependencies
-- **persistence**: 1 files, 0 dependencies
-- **layout-engines**: 1 files, 0 dependencies
-- **exporters**: 3 files, 0 dependencies
+- **strategies**: 1 files, 4 dependencies
+- **renderers**: 1 files, 1 dependencies
+- **persistence**: 1 files, 2 dependencies
+- **layout-engines**: 1 files, 2 dependencies
+- **exporters**: 3 files, 1 dependencies
 
 ---
 

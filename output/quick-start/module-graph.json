@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "type": "module-dependency-graph",
-  "generatedAt": "2025-11-16T03:27:42.756Z",
+  "generatedAt": "2025-11-16T04:22:08.109Z",
   "graph": {
     "nodes": [
       {
@@ -19,92 +19,92 @@
           "path": "/Users/samuelgleeson/dev/c3-projection/src"
         },
         "x": 61,
-        "y": 44.5
+        "y": 40.5
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-strategies",
         "label": "strategies",
         "type": "module",
-        "color": "#1dd1a1",
+        "color": "#48dbfb",
         "width": 82,
         "height": 41,
         "metadata": {
           "fileCount": 1,
-          "dependencyCount": 0,
+          "dependencyCount": 4,
           "dependentCount": 0,
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/infrastructure/strategies"
         },
         "x": 223,
-        "y": 44.5
+        "y": 40.5
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-renderers",
         "label": "renderers",
         "type": "module",
-        "color": "#1dd1a1",
+        "color": "#48dbfb",
         "width": 82,
         "height": 41,
         "metadata": {
           "fileCount": 1,
-          "dependencyCount": 0,
+          "dependencyCount": 1,
           "dependentCount": 0,
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/infrastructure/renderers"
         },
-        "x": 385,
-        "y": 44.5
+        "x": 495,
+        "y": 185.5
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-persistence",
         "label": "persistence",
         "type": "module",
-        "color": "#1dd1a1",
+        "color": "#48dbfb",
         "width": 82,
         "height": 41,
         "metadata": {
           "fileCount": 1,
-          "dependencyCount": 0,
+          "dependencyCount": 2,
           "dependentCount": 0,
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/infrastructure/persistence"
         },
-        "x": 547,
-        "y": 44.5
+        "x": 333,
+        "y": 185.5
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-layout-engines",
         "label": "layout-engines",
         "type": "module",
-        "color": "#1dd1a1",
+        "color": "#48dbfb",
         "width": 82,
         "height": 41,
         "metadata": {
           "fileCount": 1,
-          "dependencyCount": 0,
+          "dependencyCount": 2,
           "dependentCount": 0,
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/infrastructure/layout-engines"
         },
-        "x": 709,
-        "y": 44.5
+        "x": 835,
+        "y": 185.5
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-exporters",
         "label": "exporters",
         "type": "module",
-        "color": "#1dd1a1",
+        "color": "#48dbfb",
         "width": 86,
         "height": 43,
         "metadata": {
           "fileCount": 3,
-          "dependencyCount": 0,
+          "dependencyCount": 1,
           "dependentCount": 0,
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/infrastructure/exporters"
         },
-        "x": 873,
-        "y": 44.5
+        "x": 878,
+        "y": 332.5
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
@@ -116,80 +116,80 @@
         "metadata": {
           "fileCount": 4,
           "dependencyCount": 0,
-          "dependentCount": 0,
+          "dependentCount": 5,
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/domain/value-objects"
         },
-        "x": 1040,
-        "y": 44.5
+        "x": 182,
+        "y": 625
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-domain-services",
         "label": "services",
         "type": "module",
-        "color": "#1dd1a1",
+        "color": "#48dbfb",
         "width": 98,
         "height": 49,
         "metadata": {
           "fileCount": 9,
-          "dependencyCount": 0,
-          "dependentCount": 0,
+          "dependencyCount": 3,
+          "dependentCount": 2,
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/domain/services"
         },
-        "x": 1213,
-        "y": 44.5
+        "x": 665,
+        "y": 185.5
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
         "label": "ports",
         "type": "module",
-        "color": "#1dd1a1",
+        "color": "#48dbfb",
         "width": 90,
         "height": 45,
         "metadata": {
           "fileCount": 5,
-          "dependencyCount": 0,
-          "dependentCount": 0,
+          "dependencyCount": 2,
+          "dependentCount": 5,
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/domain/ports"
         },
-        "x": 1387,
-        "y": 44.5
+        "x": 403.5,
+        "y": 332.5
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
         "label": "entities",
         "type": "module",
-        "color": "#1dd1a1",
+        "color": "#48dbfb",
         "width": 96,
         "height": 48,
         "metadata": {
           "fileCount": 8,
-          "dependencyCount": 0,
-          "dependentCount": 0,
+          "dependencyCount": 1,
+          "dependentCount": 7,
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/domain/entities"
         },
-        "x": 1560,
-        "y": 44.5
+        "x": 652.5,
+        "y": 479
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-application-use-cases",
         "label": "use-cases",
         "type": "module",
-        "color": "#1dd1a1",
+        "color": "#48dbfb",
         "width": 82,
         "height": 41,
         "metadata": {
           "fileCount": 1,
-          "dependencyCount": 0,
+          "dependencyCount": 3,
           "dependentCount": 0,
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/application/use-cases"
         },
-        "x": 1729,
-        "y": 44.5
+        "x": 865,
+        "y": 40.5
       },
       {
         "id": "module-Users-samuelgleeson-dev-c3-projection-src-application-dto",
@@ -205,17 +205,132 @@
           "totalLines": 0,
           "path": "/Users/samuelgleeson/dev/c3-projection/src/application/dto"
         },
-        "x": 1891,
-        "y": 44.5
+        "x": 1027,
+        "y": 40.5
       }
     ],
-    "edges": []
+    "edges": [
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-strategies-module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-strategies",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-strategies-module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-strategies",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-strategies-module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-strategies",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-strategies-module-Users-samuelgleeson-dev-c3-projection-src-domain-services",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-strategies",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-services",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-renderers-module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-renderers",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-persistence-module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-persistence",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-persistence-module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-persistence",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-layout-engines-module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-layout-engines",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-layout-engines-module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-layout-engines",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-exporters-module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-infrastructure-exporters",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-domain-services-module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-domain-services",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-domain-services-module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-domain-services",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-domain-services-module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-domain-services",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-domain-ports-module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-domain-ports-module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-domain-ports",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-domain-entities-module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-application-use-cases-module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-application-use-cases",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-entities",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-application-use-cases-module-Users-samuelgleeson-dev-c3-projection-src-domain-services",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-application-use-cases",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-services",
+        "metadata": {}
+      },
+      {
+        "id": "module-Users-samuelgleeson-dev-c3-projection-src-application-use-cases-module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
+        "from": "module-Users-samuelgleeson-dev-c3-projection-src-application-use-cases",
+        "to": "module-Users-samuelgleeson-dev-c3-projection-src-domain-value-objects",
+        "metadata": {}
+      }
+    ]
   },
   "metadata": {
     "projectionType": "module-dependency",
-    "generatedAt": "2025-11-16T03:27:42.749Z",
+    "generatedAt": "2025-11-16T04:22:08.094Z",
     "moduleCount": 12,
-    "dependencyCount": 0,
+    "dependencyCount": 19,
     "layout": "dagre",
     "layoutConfig": {
       "rankdir": "TB",
