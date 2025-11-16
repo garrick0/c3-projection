@@ -8,16 +8,23 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "vitest run"
+    "test": "vitest run",
+    "demo:quick-start": "tsx examples/quick-start.ts ./src",
+    "demo:self-analysis": "tsx examples/analyze-self.ts",
+    "demo:full": "tsx examples/generate-module-view.ts",
+    "demo:all": "npm run demo:quick-start && npm run demo:self-analysis"
   },
   "author": "garrick0",
   "license": "MIT",
   "dependencies": {
+    "c3-parsing": "file:../c3-parsing",
     "c3-shared": "^0.1.0",
-    "c3-parsing": "^0.1.0"
+    "dagre": "^0.8.5"
   },
   "devDependencies": {
+    "@types/dagre": "^0.7.52",
     "@types/node": "^20.10.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.3.3",
     "vitest": "^1.0.4"
   },

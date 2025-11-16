@@ -3,9 +3,8 @@
  */
 
 export enum AggregationLevel {
-  FILE = 'file',
-  MODULE = 'module',
-  PACKAGE = 'package',
-  LAYER = 'layer',
-  SYSTEM = 'system'
+  DIRECTORY = 'directory',       // Group by directory
+  TOP_LEVEL = 'top-level',       // Only top-level directories
+  PACKAGE = 'package',           // Group by package.json/tsconfig
+  CUSTOM = 'custom'              // Custom grouping rules
 }

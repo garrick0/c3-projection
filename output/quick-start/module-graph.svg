@@ -1,0 +1,62 @@
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <g class="edges">
+  </g>
+
+  <g class="nodes">
+    <g>
+      <rect x="14.907103825136613" y="27.453551912568308" width="50.185792349726775" height="25.092896174863387" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="40" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">src</text>
+    </g>
+    <g>
+      <rect x="114.05464480874316" y="27.453551912568308" width="50.185792349726775" height="25.092896174863387" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="139.14754098360655" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">strategies</text>
+    </g>
+    <g>
+      <rect x="213.20218579234972" y="27.453551912568308" width="50.185792349726775" height="25.092896174863387" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="238.29508196721312" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">renderers</text>
+    </g>
+    <g>
+      <rect x="312.34972677595636" y="27.453551912568308" width="50.185792349726775" height="25.092896174863387" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="337.4426229508197" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">persistence</text>
+    </g>
+    <g>
+      <rect x="411.4972677595629" y="27.453551912568308" width="50.185792349726775" height="25.092896174863387" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="436.59016393442624" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">layout-engines</text>
+    </g>
+    <g>
+      <rect x="510.6448087431694" y="26.841530054644807" width="52.63387978142077" height="26.316939890710383" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="536.9617486338798" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">exporters</text>
+    </g>
+    <g>
+      <rect x="612.2404371584698" y="26.53551912568306" width="53.85792349726776" height="26.92896174863388" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="639.1693989071038" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">value-objects</text>
+    </g>
+    <g>
+      <rect x="715.0601092896175" y="25.005464480874316" width="59.978142076502735" height="29.989071038251367" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="745.0491803278688" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">services</text>
+    </g>
+    <g>
+      <rect x="824" y="26.229508196721312" width="55.08196721311476" height="27.54098360655738" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="851.5409836065573" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">ports</text>
+    </g>
+    <g>
+      <rect x="928.0437158469946" y="25.311475409836063" width="58.75409836065574" height="29.37704918032787" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="957.4207650273224" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">entities</text>
+    </g>
+    <g>
+      <rect x="1035.7595628415302" y="27.453551912568308" width="50.185792349726775" height="25.092896174863387" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="1060.8524590163936" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">use-cases</text>
+    </g>
+    <g>
+      <rect x="1134.9071038251366" y="27.453551912568308" width="50.185792349726775" height="25.092896174863387" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="1160" y="40" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">dto</text>
+    </g>
+  </g>
+
+</svg>
