@@ -1,0 +1,81 @@
+<svg width="1400" height="1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <g class="edges">
+    <line x1="250" y1="50" x2="432.19546045448004" y2="405.5033374721562" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="250" y1="50" x2="703.5680618595006" y2="611.1151280736091" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="250" y1="50" x2="198.42940490590294" y2="800.1177468232302" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="250" y1="50" x2="713.4513400756468" y2="231.7456235590772" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="560" y1="250" x2="478.24169494949604" y2="405.73010485810283" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="360" y1="250" x2="433.5471592715856" y2="404.83612478228554" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="360" y1="250" x2="700.8029435559336" y2="613.5231397929957" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="960" y1="250" x2="501.4870484554076" y2="431.5892877404326" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="960" y1="250" x2="759.513061981628" y2="606.4212231437725" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="1020" y1="450" x2="775.9278346231206" y2="621.2787125451785" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="760" y1="250" x2="738.118914307759" y2="600.0973710758556" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="760" y1="250" x2="229.277695850892" y2="813.5989070609996" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="760" y1="250" x2="496.81221836929336" y2="422.58215188898794" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="455" y1="450" x2="694.3133264396632" y2="620.9380903140452" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="455" y1="450" x2="222.2494175297707" y2="808.0778191849681" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="735" y1="650" x2="241.8874380361852" y2="832.6342822088203" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="990" y1="50" x2="754.5570320172426" y2="603.9834540770763" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="990" y1="50" x2="797.7302761081752" y2="217.19106425376066" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="990" y1="50" x2="230.24433410375812" y2="814.5340034176019" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)" />
+  </g>
+
+  <g class="nodes">
+    <g>
+      <rect x="0" y="25" width="100" height="50" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="50" y="50" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">src</text>
+    </g>
+    <g>
+      <rect x="200" y="25" width="100" height="50" fill="#48dbfb" stroke="#333" stroke-width="2" rx="5" />
+      <text x="250" y="50" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">strategies</text>
+    </g>
+    <g>
+      <rect x="510" y="225" width="100" height="50" fill="#48dbfb" stroke="#333" stroke-width="2" rx="5" />
+      <text x="560" y="250" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">renderers</text>
+    </g>
+    <g>
+      <rect x="310" y="225" width="100" height="50" fill="#48dbfb" stroke="#333" stroke-width="2" rx="5" />
+      <text x="360" y="250" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">persistence</text>
+    </g>
+    <g>
+      <rect x="910" y="225" width="100" height="50" fill="#48dbfb" stroke="#333" stroke-width="2" rx="5" />
+      <text x="960" y="250" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">layout-engines</text>
+    </g>
+    <g>
+      <rect x="970" y="425" width="100" height="50" fill="#48dbfb" stroke="#333" stroke-width="2" rx="5" />
+      <text x="1020" y="450" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">exporters</text>
+    </g>
+    <g>
+      <rect x="145" y="825" width="100" height="50" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="195" y="850" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">value-objects</text>
+    </g>
+    <g>
+      <rect x="710" y="225" width="100" height="50" fill="#48dbfb" stroke="#333" stroke-width="2" rx="5" />
+      <text x="760" y="250" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">services</text>
+    </g>
+    <g>
+      <rect x="405" y="425" width="100" height="50" fill="#48dbfb" stroke="#333" stroke-width="2" rx="5" />
+      <text x="455" y="450" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">ports</text>
+    </g>
+    <g>
+      <rect x="685" y="625" width="100" height="50" fill="#48dbfb" stroke="#333" stroke-width="2" rx="5" />
+      <text x="735" y="650" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">entities</text>
+    </g>
+    <g>
+      <rect x="940" y="25" width="100" height="50" fill="#48dbfb" stroke="#333" stroke-width="2" rx="5" />
+      <text x="990" y="50" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">use-cases</text>
+    </g>
+    <g>
+      <rect x="1140" y="25" width="100" height="50" fill="#1dd1a1" stroke="#333" stroke-width="2" rx="5" />
+      <text x="1190" y="50" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">dto</text>
+    </g>
+  </g>
+
+</svg>
