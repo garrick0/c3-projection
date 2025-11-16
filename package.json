@@ -21,7 +21,8 @@
     "demo:full": "tsx examples/generate-module-view.ts",
     "demo:all": "npm run demo:quick-start && npm run demo:self-analysis",
     "clean": "rm -rf dist",
-    "prepublishOnly": "npm run clean && npm run build && npm run test",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test",
     "version:dev": "npm version prerelease --preid=dev.$(git rev-parse --short HEAD) --no-git-tag-version",
     "version:canary": "npm version prerelease --preid=canary"
   },
