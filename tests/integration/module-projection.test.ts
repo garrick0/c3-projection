@@ -112,7 +112,7 @@ describe('Module Projection Integration', () => {
 
   it('should create module projection from small synthetic graph', async () => {
     // For a faster test, we can create a synthetic PropertyGraph
-    const { PropertyGraph, Node, Edge, NodeType, EdgeType, NodeMetadata, SourceMetadata } = await import('c3-parsing');
+    const { PropertyGraph, Node, Edge, NodeType, EdgeType, NodeMetadata, SourceMetadata } = await import('@garrick0/c3-parsing');
 
     const graph = new PropertyGraph('test-graph', {
       codebaseId: 'test',
