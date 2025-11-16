@@ -1,3 +1,12 @@
+/**
+ * C3 Projection Package
+ * Graph transformations and analytical views
+ * @packageDocumentation
+ */
+
+// Force TypeScript to emit index.d.ts
+export {};
+
 // Entities
 export * from './domain/entities/Projection.js';
 export * from './domain/entities/Module.js';
