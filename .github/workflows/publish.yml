@@ -86,6 +86,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Debug - List dist contents
+        run: ls -la dist/ && echo "---" && ls -la dist/index* && echo "---" && npm pack --dry-run 2>&1 | grep "dist/index"
+
       - name: Publish to GitHub Packages
         run: npm publish --tag dev
         env:
