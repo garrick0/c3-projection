@@ -5,7 +5,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { DagreLayoutEngine, type DagreLayoutConfig } from '../../src/infrastructure/layout-engines/DagreLayoutEngine.js';
 import { GraphView, type GraphViewNode, type GraphViewEdge, type GraphViewMetadata } from '../../src/domain/entities/GraphView.js';
-import { createLogger } from 'c3-shared';
+import { createLogger } from '@garrick0/c3-shared';
 
 describe('DagreLayoutEngine', () => {
   let engine: DagreLayoutEngine;

@@ -1,4 +1,4 @@
-import { Node } from 'c3-parsing';
+import { Node } from '@garrick0/c3-parsing';
 
 export interface AggregatedNode {
   id: string;

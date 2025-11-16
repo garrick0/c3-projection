@@ -1,4 +1,4 @@
-import { PropertyGraph, Node, Edge } from 'c3-parsing';
+import { PropertyGraph, Node, Edge } from '@garrick0/c3-parsing';
 import { AggregationLevel } from '../value-objects/AggregationLevel.js';
 
 export class GraphTransformer {

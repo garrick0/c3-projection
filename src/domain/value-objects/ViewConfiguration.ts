@@ -2,7 +2,7 @@
  * ViewConfiguration - Configuration for generating views
  */
 
-import { ValueObject } from 'c3-shared';
+import { ValueObject } from '@garrick0/c3-shared';
 import { ProjectionType } from './ProjectionType.js';
 import { AggregationLevel } from './AggregationLevel.js';
 

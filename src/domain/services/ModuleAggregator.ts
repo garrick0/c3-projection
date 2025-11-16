@@ -2,8 +2,8 @@
  * ModuleAggregator - Service for aggregating PropertyGraph nodes into Module entities
  */
 
-import { PropertyGraph, NodeType, type Node } from 'c3-parsing';
-import { Logger } from 'c3-shared';
+import { PropertyGraph, NodeType, type Node } from '@garrick0/c3-parsing';
+import { Logger } from '@garrick0/c3-shared';
 import { Module, type ModuleMetrics } from '../entities/Module.js';
 import { AggregationLevel } from '../value-objects/AggregationLevel.js';
 import * as path from 'path';

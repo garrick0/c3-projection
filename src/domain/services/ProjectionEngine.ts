@@ -1,8 +1,8 @@
 import { Projection } from '../entities/Projection.js';
-import { PropertyGraph } from 'c3-parsing';
+import { PropertyGraph } from '@garrick0/c3-parsing';
 import { ViewConfiguration } from '../value-objects/ViewConfiguration.js';
 import { ProjectionStrategy } from '../ports/ProjectionStrategy.js';
-import { Logger } from 'c3-shared';
+import { Logger } from '@garrick0/c3-shared';
 
 export class ProjectionEngine {
   constructor(

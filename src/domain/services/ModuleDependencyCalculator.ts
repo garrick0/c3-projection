@@ -2,8 +2,8 @@
  * ModuleDependencyCalculator - Service for calculating module-level dependencies
  */
 
-import { PropertyGraph, EdgeType } from 'c3-parsing';
-import { Logger } from 'c3-shared';
+import { PropertyGraph, EdgeType } from '@garrick0/c3-parsing';
+import { Logger } from '@garrick0/c3-shared';
 import { Module } from '../entities/Module.js';
 import * as path from 'path';
 
@@ -58,6 +58,7 @@ export class ModuleDependencyCalculator {
       const sourceModule = fileToModule.get(edge.fromNodeId);
       
       if (!sourceModule) {
+        this.logger.debug(`Source file not in any module`, { fromNodeId: edge.fromNodeId });
         continue; // Source file not in any module
       }
 
@@ -112,6 +113,15 @@ export class ModuleDependencyCalculator {
 
       // Skip if target file is not in a module (e.g., external dependency)
       if (!targetModule) {
+        if (crossModuleCount + sameModuleCount === 0) { // Only log first few failures
+          this.logger.info(`DEBUG: Target file not in fileToModule map`, { 
+            targetNodeId, 
+            sourceNodeId: edge.fromNodeId,
+            sourceModule: sourceModule.name,
+            fileToModuleSize: fileToModule.size,
+            sampleFileIds: Array.from(fileToModule.keys()).slice(0, 3) 
+          });
+        }
         continue;
       }
 

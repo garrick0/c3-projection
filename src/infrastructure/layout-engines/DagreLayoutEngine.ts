@@ -5,7 +5,7 @@
 import dagre from 'dagre';
 import { GraphLayoutEngine } from '../../domain/ports/GraphLayoutEngine.js';
 import { GraphView } from '../../domain/entities/GraphView.js';
-import { Logger } from 'c3-shared';
+import { Logger } from '@garrick0/c3-shared';
 
 export interface DagreLayoutConfig {
   rankdir?: 'TB' | 'BT' | 'LR' | 'RL';  // Top-to-Bottom, Bottom-to-Top, Left-to-Right, Right-to-Left

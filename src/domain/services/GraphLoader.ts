@@ -8,8 +8,8 @@ import {
   InMemoryGraphRepository,
   TypeScriptExtension,
   type GraphExtension
-} from 'c3-parsing';
-import { Logger } from 'c3-shared';
+} from '@garrick0/c3-parsing';
+import { Logger } from '@garrick0/c3-shared';
 
 export interface GraphLoaderConfig {
   extensions: GraphExtension[];

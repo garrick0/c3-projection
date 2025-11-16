@@ -1,0 +1,244 @@
+/**
+ * GraphLoader Unit Tests
+ */
+
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { GraphLoader } from '../../src/domain/services/GraphLoader.js';
+import { PropertyGraph, Node, NodeType } from '@garrick0/c3-parsing';
+import { Logger, LogLevel } from '@garrick0/c3-shared';
+import type { GraphExtension } from '@garrick0/c3-parsing';
+
+// Mock extension
+class MockExtension implements GraphExtension {
+  name = 'MockExtension';
+  domain = 'test';
+  nodeTypes = ['TestNode'];
+  edgeTypes = ['TestEdge'];
+  
+  parseCalls = 0;
+  linkCalls = 0;
+
+  async parse(graph: PropertyGraph, rootPath: string): Promise<void> {
+    this.parseCalls++;
+    // Add some test nodes
+    const node = new Node(`test-node-${this.parseCalls}`, NodeType.FILE, new Set(['TestNode']), {
+      domain: this.domain,
+      filePath: `${rootPath}/test${this.parseCalls}.ts`
+    });
+    graph.addNode(node);
+  }
+
+  async link(graph: PropertyGraph): Promise<void> {
+    this.linkCalls++;
+  }
+}
+
+describe('GraphLoader', () => {
+  let logger: Logger;
+
+  beforeEach(() => {
+    logger = new Logger('test', LogLevel.ERROR);
+  });
+
+  describe('load()', () => {
+    it('should load graph using single extension', async () => {
+      const mockExt = new MockExtension();
+      const loader = new GraphLoader(logger, {
+        extensions: [mockExt],
+        cacheEnabled: false
+      });
+
+      const graph = await loader.load('/test/project');
+
+      expect(mockExt.parseCalls).toBe(1);
+      expect(mockExt.linkCalls).toBe(1);
+      expect(graph.getNodeCount()).toBe(1);
+    });
+
+    it('should load graph using multiple extensions', async () => {
+      const ext1 = new MockExtension();
+      ext1.name = 'Extension1';
+      ext1.domain = 'ext1';
+      
+      const ext2 = new MockExtension();
+      ext2.name = 'Extension2';
+      ext2.domain = 'ext2';
+
+      const loader = new GraphLoader(logger, {
+        extensions: [ext1, ext2],
+        cacheEnabled: false
+      });
+
+      const graph = await loader.load('/test/project');
+
+      expect(ext1.parseCalls).toBe(1);
+      expect(ext2.parseCalls).toBe(1);
+      expect(ext1.linkCalls).toBe(1);
+      expect(ext2.linkCalls).toBe(1);
+      expect(graph.getNodeCount()).toBe(2); // One from each extension
+    });
+
+    it('should call parse in parallel', async () => {
+      const parseOrder: string[] = [];
+      
+      class SlowExtension extends MockExtension {
+        name = 'SlowExtension';
+        async parse(graph: PropertyGraph, rootPath: string): Promise<void> {
+          parseOrder.push(`${this.name}-start`);
+          await new Promise(resolve => setTimeout(resolve, 100));
+          await super.parse(graph, rootPath);
+          parseOrder.push(`${this.name}-end`);
+        }
+      }
+
+      const ext1 = new SlowExtension();
+      ext1.name = 'Ext1';
+      const ext2 = new SlowExtension();
+      ext2.name = 'Ext2';
+
+      const loader = new GraphLoader(logger, {
+        extensions: [ext1, ext2],
+        cacheEnabled: false
+      });
+
+      const startTime = Date.now();
+      await loader.load('/test/project');
+      const duration = Date.now() - startTime;
+
+      // If parallel, should take ~100ms, not 200ms
+      expect(duration).toBeLessThan(150);
+      
+      // Both should start before either ends (parallel execution)
+      expect(parseOrder.indexOf('Ext1-start')).toBeLessThan(parseOrder.indexOf('Ext2-end'));
+      expect(parseOrder.indexOf('Ext2-start')).toBeLessThan(parseOrder.indexOf('Ext1-end'));
+    });
+
+    it('should call link sequentially after parse', async () => {
+      const callOrder: string[] = [];
+
+      class OrderedExtension extends MockExtension {
+        async parse(graph: PropertyGraph, rootPath: string): Promise<void> {
+          callOrder.push(`${this.name}-parse`);
+          await super.parse(graph, rootPath);
+        }
+
+        async link(graph: PropertyGraph): Promise<void> {
+          callOrder.push(`${this.name}-link`);
+          await super.link(graph);
+        }
+      }
+
+      const ext1 = new OrderedExtension();
+      ext1.name = 'Ext1';
+      const ext2 = new OrderedExtension();
+      ext2.name = 'Ext2';
+
+      const loader = new GraphLoader(logger, {
+        extensions: [ext1, ext2],
+        cacheEnabled: false
+      });
+
+      await loader.load('/test/project');
+
+      // All parses should complete before any links
+      const firstLinkIndex = callOrder.findIndex(call => call.includes('link'));
+      const lastParseIndex = callOrder.findIndex(call => call.includes('parse'));
+      
+      callOrder.forEach((call, index) => {
+        if (call.includes('link')) {
+          expect(index).toBeGreaterThan(lastParseIndex);
+        }
+      });
+    });
+
+    it('should handle extension errors gracefully', async () => {
+      class FailingExtension extends MockExtension {
+        name = 'FailingExtension';
+        async parse(): Promise<void> {
+          throw new Error('Parse failed');
+        }
+      }
+
+      const failingExt = new FailingExtension();
+      const loader = new GraphLoader(logger, {
+        extensions: [failingExt],
+        cacheEnabled: false
+      });
+
+      // Should throw error
+      await expect(loader.load('/test/project')).rejects.toThrow('Parse failed');
+    });
+
+    it('should return cached graph when enabled', async () => {
+      const ext = new MockExtension();
+      const loader = new GraphLoader(logger, {
+        extensions: [ext],
+        cacheEnabled: true
+      });
+
+      const graph1 = await loader.load('/test/project');
+      const graph2 = await loader.load('/test/project');
+
+      // Should only parse once
+      expect(ext.parseCalls).toBe(1);
+      expect(ext.linkCalls).toBe(1);
+      
+      // Should return same graph instance
+      expect(graph2).toBe(graph1);
+    });
+
+    it('should not cache when disabled', async () => {
+      const ext = new MockExtension();
+      const loader = new GraphLoader(logger, {
+        extensions: [ext],
+        cacheEnabled: false
+      });
+
+      const graph1 = await loader.load('/test/project');
+      const graph2 = await loader.load('/test/project');
+
+      // Should parse twice
+      expect(ext.parseCalls).toBe(2);
+      expect(ext.linkCalls).toBe(2);
+      
+      // Should return different graph instances
+      expect(graph2).not.toBe(graph1);
+    });
+  });
+
+  describe('clearCache()', () => {
+    it('should clear cached graphs', async () => {
+      const ext = new MockExtension();
+      const loader = new GraphLoader(logger, {
+        extensions: [ext],
+        cacheEnabled: true
+      });
+
+      await loader.load('/test/project');
+      loader.clearCache();
+      await loader.load('/test/project');
+
+      // Should parse twice after cache clear
+      expect(ext.parseCalls).toBe(2);
+    });
+  });
+
+  describe('getExtensions()', () => {
+    it('should return registered extensions', () => {
+      const ext1 = new MockExtension();
+      ext1.name = 'Ext1';
+      const ext2 = new MockExtension();
+      ext2.name = 'Ext2';
+
+      const loader = new GraphLoader(logger, {
+        extensions: [ext1, ext2],
+        cacheEnabled: false
+      });
+
+      const extensions = loader.getExtensions();
+      expect(extensions).toHaveLength(2);
+      expect(extensions.map(e => e.name)).toEqual(['Ext1', 'Ext2']);
+    });
+  });
+});
+

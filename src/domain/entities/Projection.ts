@@ -2,7 +2,7 @@
  * Projection - Base projection entity
  */
 
-import { Entity } from 'c3-shared';
+import { Entity } from '@garrick0/c3-shared';
 import { ProjectionType } from '../value-objects/ProjectionType.js';
 
 export interface ProjectionMetadata {

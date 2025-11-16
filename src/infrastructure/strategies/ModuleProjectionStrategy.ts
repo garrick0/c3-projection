@@ -5,13 +5,13 @@
 import { ProjectionStrategy } from '../../domain/ports/ProjectionStrategy.js';
 import { Projection } from '../../domain/entities/Projection.js';
 import { ModuleProjection, type ModuleProjectionMetadata } from '../../domain/entities/ModuleProjection.js';
-import { PropertyGraph } from 'c3-parsing';
+import { PropertyGraph } from '@garrick0/c3-parsing';
 import { ViewConfiguration } from '../../domain/value-objects/ViewConfiguration.js';
 import { ProjectionType } from '../../domain/value-objects/ProjectionType.js';
 import { ModuleAggregator, type AggregationConfig } from '../../domain/services/ModuleAggregator.js';
 import { ModuleDependencyCalculator } from '../../domain/services/ModuleDependencyCalculator.js';
 import { AggregationLevel } from '../../domain/value-objects/AggregationLevel.js';
-import { Logger } from 'c3-shared';
+import { Logger } from '@garrick0/c3-shared';
 
 export class ModuleProjectionStrategy implements ProjectionStrategy {
   private aggregator: ModuleAggregator;

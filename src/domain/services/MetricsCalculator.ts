@@ -1,4 +1,4 @@
-import { PropertyGraph } from 'c3-parsing';
+import { PropertyGraph } from '@garrick0/c3-parsing';
 
 export interface GraphMetrics {
   nodeCount: number;

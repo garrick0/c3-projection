@@ -8,7 +8,7 @@ import { ModuleProjection, type ModuleProjectionMetadata } from '../../src/domai
 import { Module, type ModuleMetrics } from '../../src/domain/entities/Module.js';
 import { ProjectionType } from '../../src/domain/value-objects/ProjectionType.js';
 import { AggregationLevel } from '../../src/domain/value-objects/AggregationLevel.js';
-import { createLogger } from 'c3-shared';
+import { createLogger } from '@garrick0/c3-shared';
 
 describe('GraphViewBuilder', () => {
   let builder: GraphViewBuilder;

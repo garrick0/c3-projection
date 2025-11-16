@@ -5,11 +5,11 @@
 import { describe, it, expect } from 'vitest';
 import { GraphLoader } from '../../src/domain/services/GraphLoader.js';
 import { ModuleProjectionStrategy } from '../../src/infrastructure/strategies/ModuleProjectionStrategy.js';
-import { TypeScriptExtension } from 'c3-parsing';
+import { TypeScriptExtension } from '@garrick0/c3-parsing';
 import { ProjectionType } from '../../src/domain/value-objects/ProjectionType.js';
 import { AggregationLevel } from '../../src/domain/value-objects/AggregationLevel.js';
 import { ViewConfiguration } from '../../src/domain/value-objects/ViewConfiguration.js';
-import { createLogger } from 'c3-shared';
+import { createLogger } from '@garrick0/c3-shared';
 import { ModuleProjection } from '../../src/domain/entities/ModuleProjection.js';
 import * as path from 'path';
 import { fileURLToPath } from 'url';

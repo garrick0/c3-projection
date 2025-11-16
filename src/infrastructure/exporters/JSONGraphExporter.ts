@@ -3,7 +3,7 @@
  */
 
 import { GraphView } from '../../domain/entities/GraphView.js';
-import { Logger } from 'c3-shared';
+import { Logger } from '@garrick0/c3-shared';
 
 export interface JSONExportOptions {
   pretty?: boolean;

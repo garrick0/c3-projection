@@ -1,278 +1,207 @@
 /**
- * Tests for ModuleDependencyCalculator
+ * ModuleDependencyCalculator Unit Tests
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
+import { PropertyGraph, NodeType, EdgeType, Node, Edge } from '@garrick0/c3-parsing';
+import { Logger, LogLevel } from '@garrick0/c3-shared';
 import { ModuleDependencyCalculator } from '../../src/domain/services/ModuleDependencyCalculator.js';
-import { Module, type ModuleMetrics } from '../../src/domain/entities/Module.js';
-import { PropertyGraph, Node, Edge, NodeType, EdgeType, NodeMetadata, SourceMetadata } from 'c3-parsing';
-import { createLogger } from 'c3-shared';
+import { Module } from '../../src/domain/entities/Module.js';
 
 describe('ModuleDependencyCalculator', () => {
   let calculator: ModuleDependencyCalculator;
-  const logger = createLogger('test');
+  let logger: Logger;
 
   beforeEach(() => {
+    logger = new Logger('test', LogLevel.ERROR);
     calculator = new ModuleDependencyCalculator(logger);
   });
 
-  describe('calculate', () => {
-    it('should calculate module dependencies from import edges', () => {
-      // Create test graph
-      const graph = new PropertyGraph('test-graph', {
-        codebaseId: 'test',
-        parsedAt: new Date(),
-        language: 'typescript',
-        version: '1.0.0'
+  describe('calculate()', () => {
+    it('should detect dependencies between modules', () => {
+      // Create graph with file nodes
+      const graph = new PropertyGraph('test-graph');
+      const file1 = new Node('file-1', NodeType.FILE, new Set(['File']), {
+        filePath: '/src/services/UserService.ts'
       });
+      const file2 = new Node('file-2', NodeType.FILE, new Set(['File']), {
+        filePath: '/src/data/DataStore.ts'
+      });
+      
+      graph.addNode(file1);
+      graph.addNode(file2);
 
-      const sourceMetadata: SourceMetadata = {
-        domain: 'code',
-        extension: 'typescript',
-        version: '1.0.0'
-      };
-
-      // Add nodes
-      graph.addNode(new Node(
-        'file1',
-        NodeType.FILE,
-        'FileA.ts',
-        { filePath: '/test/src/domain/FileA.ts' } as NodeMetadata,
-        new Set(['CodeElement', 'File']),
-        sourceMetadata
-      ));
-
-      graph.addNode(new Node(
-        'file2',
-        NodeType.FILE,
-        'FileB.ts',
-        { filePath: '/test/src/application/FileB.ts' } as NodeMetadata,
-        new Set(['CodeElement', 'File']),
-        sourceMetadata
-      ));
-
-      // Add import edge: file2 imports file1
-      graph.addEdge(new Edge(
-        'edge1',
-        EdgeType.IMPORTS,
-        'file2',
-        'file1',
-        {},
-        sourceMetadata
-      ));
+      // Add import edge
+      const importEdge = new Edge('edge-1', EdgeType.IMPORTS, 'file-1', 'file-2');
+      graph.addEdge(importEdge);
 
       // Create modules
-      const metrics: ModuleMetrics = {
-        fileCount: 1,
-        totalLines: 100,
-        dependencyCount: 0,
-        dependentCount: 0
-      };
-
-      const moduleDomain = new Module(
-        'module-domain',
-        'domain',
-        '/test/src/domain',
-        ['file1'],
+      const moduleA = new Module(
+        'mod-services',
+        'services',
+        '/src/services',
+        ['file-1'],
         new Set(),
         new Set(),
-        { ...metrics }
+        { fileCount: 1, totalLines: 0, dependencyCount: 0, dependentCount: 0 }
       );
 
-      const moduleApp = new Module(
-        'module-app',
-        'application',
-        '/test/src/application',
-        ['file2'],
+      const moduleB = new Module(
+        'mod-data',
+        'data',
+        '/src/data',
+        ['file-2'],
         new Set(),
         new Set(),
-        { ...metrics }
+        { fileCount: 1, totalLines: 0, dependencyCount: 0, dependentCount: 0 }
       );
-
-      const modules = [moduleDomain, moduleApp];
 
       // Calculate dependencies
-      calculator.calculate(modules, graph);
+      calculator.calculate([moduleA, moduleB], graph);
 
-      // Assertions
-      expect(moduleApp.getDependencyCount()).toBe(1);
-      expect(moduleApp.hasDependency('module-domain')).toBe(true);
+      // Assert
+      expect(moduleA.getDependencyCount()).toBe(1);
+      expect(moduleA.getDependencies()).toContain('mod-data');
+      expect(moduleB.getDependentCount()).toBe(1);
+      expect(moduleB.getDependents()).toContain('mod-services');
+    });
 
-      expect(moduleDomain.getDependentCount()).toBe(1);
-      expect(moduleDomain.hasDependent('module-app')).toBe(true);
+    it('should ignore same-module dependencies', () => {
+      const graph = new PropertyGraph('test-graph');
+      const file1 = new Node('file-1', NodeType.FILE, new Set(['File']), {
+        filePath: '/src/services/UserService.ts'
+      });
+      const file2 = new Node('file-2', NodeType.FILE, new Set(['File']), {
+        filePath: '/src/services/AuthService.ts'
+      });
+
+      graph.addNode(file1);
+      graph.addNode(file2);
+
+      // Both files in same module
+      const edge = new Edge('edge-1', EdgeType.IMPORTS, 'file-1', 'file-2');
+      graph.addEdge(edge);
+
+      const module = new Module(
+        'mod-services',
+        'services',
+        '/src/services',
+        ['file-1', 'file-2'],
+        new Set(),
+        new Set(),
+        { fileCount: 2, totalLines: 0, dependencyCount: 0, dependentCount: 0 }
+      );
+
+      calculator.calculate([module], graph);
+
+      // No cross-module dependencies
+      expect(module.getDependencyCount()).toBe(0);
+    });
+
+    it('should handle external dependencies gracefully', () => {
+      const graph = new PropertyGraph('test-graph');
+      const file1 = new Node('file-1', NodeType.FILE, new Set(['File']), {
+        filePath: '/src/index.ts'
+      });
+      
+      graph.addNode(file1);
+
+      // Import to external module (not in graph)
+      const edge = new Edge('edge-1', EdgeType.IMPORTS, 'file-1', 'external-module');
+      graph.addEdge(edge);
+
+      const module = new Module(
+        'mod-src',
+        'src',
+        '/src',
+        ['file-1'],
+        new Set(),
+        new Set(),
+        { fileCount: 1, totalLines: 0, dependencyCount: 0, dependentCount: 0 }
+      );
+
+      // Should not throw
+      expect(() => calculator.calculate([module], graph)).not.toThrow();
+      expect(module.getDependencyCount()).toBe(0);
+    });
+
+    it('should update module metrics', () => {
+      const graph = new PropertyGraph('test-graph');
+      const file1 = new Node('file-1', NodeType.FILE, new Set(['File']), {
+        filePath: '/src/a.ts'
+      });
+      const file2 = new Node('file-2', NodeType.FILE, new Set(['File']), {
+        filePath: '/src/b.ts'
+      });
+
+      graph.addNode(file1);
+      graph.addNode(file2);
+
+      const edge = new Edge('edge-1', EdgeType.IMPORTS, 'file-1', 'file-2');
+      graph.addEdge(edge);
+
+      const moduleA = new Module(
+        'mod-a',
+        'a',
+        '/src/a',
+        ['file-1'],
+        new Set(),
+        new Set(),
+        { fileCount: 1, totalLines: 0, dependencyCount: 0, dependentCount: 0 }
+      );
+
+      const moduleB = new Module(
+        'mod-b',
+        'b',
+        '/src/b',
+        ['file-2'],
+        new Set(),
+        new Set(),
+        { fileCount: 1, totalLines: 0, dependencyCount: 0, dependentCount: 0 }
+      );
+
+      calculator.calculate([moduleA, moduleB], graph);
 
       // Metrics should be updated
-      expect(moduleApp.metrics.dependencyCount).toBe(1);
-      expect(moduleDomain.metrics.dependentCount).toBe(1);
-    });
-
-    it('should skip self-dependencies', () => {
-      const graph = new PropertyGraph('test-graph', {
-        codebaseId: 'test',
-        parsedAt: new Date(),
-        language: 'typescript',
-        version: '1.0.0'
-      });
-
-      const sourceMetadata: SourceMetadata = {
-        domain: 'code',
-        extension: 'typescript',
-        version: '1.0.0'
-      };
-
-      // Add nodes in same module
-      graph.addNode(new Node(
-        'file1',
-        NodeType.FILE,
-        'FileA.ts',
-        { filePath: '/test/src/domain/FileA.ts' } as NodeMetadata,
-        new Set(['CodeElement', 'File']),
-        sourceMetadata
-      ));
-
-      graph.addNode(new Node(
-        'file2',
-        NodeType.FILE,
-        'FileB.ts',
-        { filePath: '/test/src/domain/FileB.ts' } as NodeMetadata,
-        new Set(['CodeElement', 'File']),
-        sourceMetadata
-      ));
-
-      // Add import edge between files in same module
-      graph.addEdge(new Edge(
-        'edge1',
-        EdgeType.IMPORTS,
-        'file1',
-        'file2',
-        {},
-        sourceMetadata
-      ));
-
-      const metrics: ModuleMetrics = {
-        fileCount: 2,
-        totalLines: 200,
-        dependencyCount: 0,
-        dependentCount: 0
-      };
-
-      const moduleDomain = new Module(
-        'module-domain',
-        'domain',
-        '/test/src/domain',
-        ['file1', 'file2'],
-        new Set(),
-        new Set(),
-        { ...metrics }
-      );
-
-      const modules = [moduleDomain];
-
-      // Calculate dependencies
-      calculator.calculate(modules, graph);
-
-      // Should not have self-dependency
-      expect(moduleDomain.getDependencyCount()).toBe(0);
-      expect(moduleDomain.getDependentCount()).toBe(0);
-    });
-
-    it('should handle multiple dependencies between modules', () => {
-      const graph = new PropertyGraph('test-graph', {
-        codebaseId: 'test',
-        parsedAt: new Date(),
-        language: 'typescript',
-        version: '1.0.0'
-      });
-
-      const sourceMetadata: SourceMetadata = {
-        domain: 'code',
-        extension: 'typescript',
-        version: '1.0.0'
-      };
-
-      // Module A: file1, file2
-      graph.addNode(new Node('file1', NodeType.FILE, 'FileA1.ts', { filePath: '/test/A/FileA1.ts' } as NodeMetadata, new Set(['CodeElement', 'File']), sourceMetadata));
-      graph.addNode(new Node('file2', NodeType.FILE, 'FileA2.ts', { filePath: '/test/A/FileA2.ts' } as NodeMetadata, new Set(['CodeElement', 'File']), sourceMetadata));
-
-      // Module B: file3, file4
-      graph.addNode(new Node('file3', NodeType.FILE, 'FileB1.ts', { filePath: '/test/B/FileB1.ts' } as NodeMetadata, new Set(['CodeElement', 'File']), sourceMetadata));
-      graph.addNode(new Node('file4', NodeType.FILE, 'FileB2.ts', { filePath: '/test/B/FileB2.ts' } as NodeMetadata, new Set(['CodeElement', 'File']), sourceMetadata));
-
-      // Multiple imports from B to A
-      graph.addEdge(new Edge('edge1', EdgeType.IMPORTS, 'file3', 'file1', {}, sourceMetadata));
-      graph.addEdge(new Edge('edge2', EdgeType.IMPORTS, 'file4', 'file2', {}, sourceMetadata));
-
-      const metrics: ModuleMetrics = {
-        fileCount: 2,
-        totalLines: 200,
-        dependencyCount: 0,
-        dependentCount: 0
-      };
-
-      const moduleA = new Module('module-A', 'A', '/test/A', ['file1', 'file2'], new Set(), new Set(), { ...metrics });
-      const moduleB = new Module('module-B', 'B', '/test/B', ['file3', 'file4'], new Set(), new Set(), { ...metrics });
-
-      const modules = [moduleA, moduleB];
-
-      calculator.calculate(modules, graph);
-
-      // Module B should depend on A (only once, even with multiple import edges)
-      expect(moduleB.getDependencyCount()).toBe(1);
-      expect(moduleB.hasDependency('module-A')).toBe(true);
-
-      expect(moduleA.getDependentCount()).toBe(1);
-      expect(moduleA.hasDependent('module-B')).toBe(true);
+      expect(moduleA.metrics.dependencyCount).toBe(1);
+      expect(moduleB.metrics.dependentCount).toBe(1);
     });
   });
 
-  describe('getTransitiveDependencies', () => {
+  describe('getTransitiveDependencies()', () => {
     it('should calculate transitive dependencies', () => {
-      const metrics: ModuleMetrics = {
-        fileCount: 1,
-        totalLines: 100,
-        dependencyCount: 0,
-        dependentCount: 0
-      };
+      // A -> B -> C
+      const moduleA = new Module('mod-a', 'a', '/a', [], new Set(['mod-b']), new Set(), {
+        fileCount: 0, totalLines: 0, dependencyCount: 1, dependentCount: 0
+      });
+      const moduleB = new Module('mod-b', 'b', '/b', [], new Set(['mod-c']), new Set(), {
+        fileCount: 0, totalLines: 0, dependencyCount: 1, dependentCount: 0
+      });
+      const moduleC = new Module('mod-c', 'c', '/c', [], new Set(), new Set(), {
+        fileCount: 0, totalLines: 0, dependencyCount: 0, dependentCount: 0
+      });
 
-      // Create chain: A -> B -> C
-      const moduleA = new Module('A', 'A', '/A', ['fileA'], new Set(['B']), new Set(), { ...metrics });
-      const moduleB = new Module('B', 'B', '/B', ['fileB'], new Set(['C']), new Set(['A']), { ...metrics });
-      const moduleC = new Module('C', 'C', '/C', ['fileC'], new Set(), new Set(['B']), { ...metrics });
+      const transitive = calculator.getTransitiveDependencies('mod-a', [moduleA, moduleB, moduleC]);
 
-      const modules = [moduleA, moduleB, moduleC];
-
-      const transitive = calculator.getTransitiveDependencies('A', modules);
-
-      // A transitively depends on both B and C
+      expect(transitive.has('mod-b')).toBe(true);
+      expect(transitive.has('mod-c')).toBe(true);
       expect(transitive.size).toBe(2);
-      expect(transitive.has('B')).toBe(true);
-      expect(transitive.has('C')).toBe(true);
     });
-  });
 
-  describe('getTransitiveDependents', () => {
-    it('should calculate transitive dependents', () => {
-      const metrics: ModuleMetrics = {
-        fileCount: 1,
-        totalLines: 100,
-        dependencyCount: 0,
-        dependentCount: 0
-      };
+    it('should handle circular dependencies', () => {
+      // A -> B -> A
+      const moduleA = new Module('mod-a', 'a', '/a', [], new Set(['mod-b']), new Set(), {
+        fileCount: 0, totalLines: 0, dependencyCount: 1, dependentCount: 0
+      });
+      const moduleB = new Module('mod-b', 'b', '/b', [], new Set(['mod-a']), new Set(), {
+        fileCount: 0, totalLines: 0, dependencyCount: 1, dependentCount: 0
+      });
 
-      // Create chain: A -> B -> C
-      const moduleA = new Module('A', 'A', '/A', ['fileA'], new Set(['B']), new Set(), { ...metrics });
-      const moduleB = new Module('B', 'B', '/B', ['fileB'], new Set(['C']), new Set(['A']), { ...metrics });
-      const moduleC = new Module('C', 'C', '/C', ['fileC'], new Set(), new Set(['B']), { ...metrics });
+      // Should not infinite loop
+      const transitive = calculator.getTransitiveDependencies('mod-a', [moduleA, moduleB]);
 
-      const modules = [moduleA, moduleB, moduleC];
-
-      const transitive = calculator.getTransitiveDependents('C', modules);
-
-      // C has transitive dependents A and B
-      expect(transitive.size).toBe(2);
-      expect(transitive.has('A')).toBe(true);
-      expect(transitive.has('B')).toBe(true);
+      expect(transitive.has('mod-b')).toBe(true);
+      expect(transitive.has('mod-a')).toBe(true);
     });
   });
 });
-

@@ -2,7 +2,7 @@
  * GraphViewBuilder - Converts projections to GraphView for visualization
  */
 
-import { Logger } from 'c3-shared';
+import { Logger } from '@garrick0/c3-shared';
 import { GraphView, type GraphViewNode, type GraphViewEdge, type GraphViewMetadata } from '../entities/GraphView.js';
 import { ModuleProjection } from '../entities/ModuleProjection.js';
 import { Module } from '../entities/Module.js';

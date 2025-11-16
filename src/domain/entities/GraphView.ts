@@ -2,7 +2,7 @@
  * GraphView - Generic graph representation for visualization
  */
 
-import { Entity } from 'c3-shared';
+import { Entity } from '@garrick0/c3-shared';
 
 export interface GraphViewNode {
   id: string;
